@@ -39,6 +39,21 @@ class Transaction extends Equatable {
 
   /// to Json
   JsonMap toJson() => _$TransactionToJson(this);
+  Transaction copyWith({
+    String? id,
+    String? title,
+    double? amount,
+    String? desc,
+    DateTime? date,
+  }) {
+    return Transaction(
+      title: title ?? this.title,
+      date: date ?? this.date,
+      amount: amount ?? this.amount,
+      desc: desc ?? this.desc,
+      id: id ?? this.id,
+    );
+  }
 
   @override
   List<Object?> get props => [title, amount, desc, date];

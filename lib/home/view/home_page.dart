@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/home/cubit/home_cubit.dart';
+import 'package:personal_finance_app/transaction_overview/transaction_overview_page.dart';
+import 'package:personal_finance_app/stats_page/stats_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,20 +22,22 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectTab = context.select((HomeCubit cubit) => cubit.state.tab);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('123'),
-      ),
       body: IndexedStack(
         index: selectTab.index,
         children: [
-          Text('Overview'),
-          Text('Stats'),
+          TransactionOverviewPage(),
+          StatsPage(),
         ],
       ),
       floatingActionButton: IconButton(
         key: Key('homeView_addTodo_floatingActionButton'),
         icon: const Icon(Icons.add),
-        onPressed: () => (print(123)),
+        onPressed: () => showModalBottomSheet<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return Text('EditPage');
+          },
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(

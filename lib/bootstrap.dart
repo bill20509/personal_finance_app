@@ -28,12 +28,13 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap({required TransactionApi transactionApi}) async {
+void bootstrap({required TransactionApi transactionApi}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
-  final transactionRepository = TransactionRepository();
-  await runZonedGuarded(
+  final transactionRepository =
+      TransactionRepository(transactionApi: transactionApi);
+  runZonedGuarded(
     () async {
       await BlocOverrides.runZoned(
         () async => runApp(

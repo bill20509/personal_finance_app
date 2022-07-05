@@ -14,5 +14,7 @@ abstract class TransactionApi {
   Future<void> saveTransaction(Transaction tx);
 
   /// delete transactions
-  Future<void> deleteTransaction(String? id);
+  Future<void> deleteTransaction(String id);
 }
+
+class TransactionNotFound implements Exception {}

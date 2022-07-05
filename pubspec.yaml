@@ -19,6 +19,7 @@ dependencies:
     path: packages/transaction_repository
   transaction_api:
     path: packages/transaction_api
+  shared_preferences: ^2.0.7
   local_transaction_api:
    path: packages/local_transaction_api
 

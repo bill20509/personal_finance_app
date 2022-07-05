@@ -9,9 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:local_transaction_api/local_transaction_api.dart';
 import 'package:personal_finance_app/app/app.dart';
 import 'package:personal_finance_app/bootstrap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final transactionApi = const LocalTransactionApi();
+  final transactionApi =
+      LocalTransactionApi(plugin: await SharedPreferences.getInstance());
   bootstrap(transactionApi: transactionApi);
 }
