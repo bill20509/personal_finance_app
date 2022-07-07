@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:transaction_api/transaction_api.dart';
+part of 'transaction_overview_bloc.dart';
 
 enum TransactionOverviewStatus {
   fail,
@@ -17,6 +16,17 @@ class TransactionOverviewState extends Equatable {
   final TransactionOverviewStatus status;
   final List<Transaction> txs;
   final Transaction? lastestDeletedTx;
+  TransactionOverviewState copyWith({
+    TransactionOverviewStatus? status,
+    List<Transaction>? txs,
+    Transaction? lastestDeletedTx,
+  }) {
+    return TransactionOverviewState(
+      status: status ?? this.status,
+      txs: txs ?? this.txs,
+      lastestDeletedTx: lastestDeletedTx ?? this.lastestDeletedTx,
+    );
+  }
 
   @override
   List<Object?> get props => [

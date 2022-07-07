@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_finance_app/add_transaction/view/add_transaction_page.dart';
 import 'package:personal_finance_app/home/cubit/home_cubit.dart';
 import 'package:personal_finance_app/transaction_overview/transaction_overview_page.dart';
 import 'package:personal_finance_app/stats_page/stats_page.dart';
@@ -32,12 +33,7 @@ class HomeView extends StatelessWidget {
       floatingActionButton: IconButton(
         key: Key('homeView_addTodo_floatingActionButton'),
         icon: const Icon(Icons.add),
-        onPressed: () => showModalBottomSheet<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return Text('EditPage');
-          },
-        ),
+        onPressed: () => Navigator.of(context).push(AddTransactionPage.route()),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
