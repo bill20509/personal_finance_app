@@ -12,5 +12,6 @@ class TransactionOverviewSubscriptionRequested
 }
 
 class TransactionOverviewDeleteRequested extends TransactionOverviewEvent {
-  const TransactionOverviewDeleteRequested();
+  const TransactionOverviewDeleteRequested(this.tx);
+  final Transaction tx;
 }

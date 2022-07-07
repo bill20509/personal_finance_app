@@ -14,6 +14,7 @@ class TransactionBloc
   })  : _transactionRepository = transactionRepository,
         super(const TransactionOverviewState()) {
     on<TransactionOverviewSubscriptionRequested>(_onSubscriptionRequested);
+    on<TransactionOverviewDeleteRequested>(_onTransactionDeleteRequested);
   }
   final TransactionRepository _transactionRepository;
 
@@ -32,5 +33,18 @@ class TransactionBloc
         status: TransactionOverviewStatus.fail,
       ),
     );
+  }
+
+  Future<void> _onTransactionDeleteRequested(
+    TransactionOverviewDeleteRequested event,
+    Emitter<TransactionOverviewState> emit,
+  ) async {
+    emit(state.copyWith(status: TransactionOverviewStatus.loading));
+    try {
+      await _transactionRepository.deleteTransaction(event.tx.id);
+      emit(state.copyWith(status: TransactionOverviewStatus.success));
+    } catch (e) {
+      emit(state.copyWith(status: TransactionOverviewStatus.fail));
+    }
   }
 }
