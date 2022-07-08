@@ -42,7 +42,7 @@ class TransactionCard extends StatelessWidget {
                         Icons.dinner_dining,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Text(tx.title),

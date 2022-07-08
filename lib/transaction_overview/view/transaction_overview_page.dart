@@ -54,12 +54,12 @@ class TransactionOverviewView extends StatelessWidget {
                   flex: 1,
                   child: Builder(
                     builder: (context) {
-                      double count = 0;
+                      var count = 0.0;
                       for (final tx in state.txs) {
                         count += tx.amount;
                       }
                       return Center(
-                        child: Text('total amount: ${count}'),
+                        child: Text('total amount: $count}'),
                       );
                     },
                   ),
@@ -78,20 +78,6 @@ class TransactionOverviewView extends StatelessWidget {
                       );
                     },
                   ),
-                  // child: Column(
-                  //   children: [
-                  //     if (state.txs.isEmpty) const Text("It's empty"),
-                  //     if (state.txs.isNotEmpty)
-                  //       CupertinoScrollbar(
-                  //         child: ListView(
-                  //           children: [
-                  //             for (final tx in state.txs)
-                  //               TransactionCard(tx: tx),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //   ],
-                  // ),
                 )
               ],
             );
