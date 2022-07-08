@@ -5,6 +5,8 @@ import 'package:personal_finance_app/transaction_overview/bloc/transaction_overv
 import 'package:transaction_api/transaction_api.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
+import '../widget/trnsaction_card.dart';
+
 class TransactionOverviewPage extends StatelessWidget {
   const TransactionOverviewPage({Key? key}) : super(key: key);
 
@@ -46,47 +48,54 @@ class TransactionOverviewView extends StatelessWidget {
         ],
         child: BlocBuilder<TransactionBloc, TransactionOverviewState>(
           builder: (context, state) {
-            if (state.txs.isEmpty) {
-              return const Text("It's empty");
-            }
-            return CupertinoScrollbar(
-              child: ListView(
-                children: [
-                  for (final tx in state.txs) _transactionCard(tx: tx),
-                ],
-              ),
+            return Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Builder(
+                    builder: (context) {
+                      double count = 0;
+                      for (final tx in state.txs) {
+                        count += tx.amount;
+                      }
+                      return Center(
+                        child: Text('total amount: ${count}'),
+                      );
+                    },
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Builder(
+                    builder: (context) {
+                      if (state.txs.isEmpty) return const Text("It's empty");
+                      return CupertinoScrollbar(
+                        child: ListView(
+                          children: [
+                            for (final tx in state.txs) TransactionCard(tx: tx),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  // child: Column(
+                  //   children: [
+                  //     if (state.txs.isEmpty) const Text("It's empty"),
+                  //     if (state.txs.isNotEmpty)
+                  //       CupertinoScrollbar(
+                  //         child: ListView(
+                  //           children: [
+                  //             for (final tx in state.txs)
+                  //               TransactionCard(tx: tx),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //   ],
+                  // ),
+                )
+              ],
             );
           },
-        ),
-      ),
-    );
-  }
-}
-
-class _transactionCard extends StatelessWidget {
-  const _transactionCard({
-    Key? key,
-    required this.tx,
-  }) : super(key: key);
-  final Transaction tx;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.read<TransactionBloc>().add(
-            TransactionOverviewDeleteRequested(tx),
-          ),
-      child: Card(
-        child: Container(
-          height: 50,
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(tx.title),
-                Text('${tx.amount}'),
-              ],
-            ),
-          ),
         ),
       ),
     );

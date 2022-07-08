@@ -30,9 +30,9 @@ class HomeView extends StatelessWidget {
           StatsPage(),
         ],
       ),
-      floatingActionButton: IconButton(
-        key: Key('homeView_addTodo_floatingActionButton'),
-        icon: const Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(
+        key: const Key('homeView_addTodo_floatingActionButton'),
+        child: const Icon(Icons.add),
         onPressed: () => Navigator.of(context).push(AddTransactionPage.route()),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
