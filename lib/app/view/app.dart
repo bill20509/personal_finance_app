@@ -31,6 +31,11 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        textTheme: TextTheme(
+          bodyText1: TextStyle(
+            fontSize: 20,
+          ),
+        ),
         appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 2, 37, 52)),
         colorScheme: ColorScheme.fromSwatch(
           accentColor: Color.fromARGB(255, 2, 37, 52),

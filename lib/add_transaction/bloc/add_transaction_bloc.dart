@@ -19,6 +19,8 @@ class AddTransactionBloc
     on<AddTransactionSubmitted>(_onSubmitted);
     on<AddTransactionAmountChanged>(_onAmountChanged);
     on<AddTransactionTitleChanged>(_onTitleChanged);
+    on<AddTransactionMainTypeChanged>(_onMainTypeChanged);
+    on<AddTransactionSubTypeChanged>(_onSubTypeChanged);
   }
   final TransactionRepository _transactionRepository;
   Future<void> _onSubmitted(
@@ -31,6 +33,9 @@ class AddTransactionBloc
       date: state.dateTime,
       desc: state.desc,
       amount: state.amount,
+      transactionType: state.transactionType,
+      mainType: state.mainType,
+      subType: state.subType,
     );
     try {
       await _transactionRepository.saveTransaction(tx);
@@ -42,15 +47,29 @@ class AddTransactionBloc
 
   void _onTitleChanged(
     AddTransactionTitleChanged event,
-    Emitter emit,
+    Emitter<AddTransactionState> emit,
   ) {
     emit(state.copyWith(title: event.title));
   }
 
   void _onAmountChanged(
     AddTransactionAmountChanged event,
-    Emitter emit,
+    Emitter<AddTransactionState> emit,
   ) {
     emit(state.copyWith(amount: event.amount));
+  }
+
+  void _onMainTypeChanged(
+    AddTransactionMainTypeChanged event,
+    Emitter<AddTransactionState> emit,
+  ) {
+    emit(state.copyWith(mainType: event.mainType));
+  }
+
+  void _onSubTypeChanged(
+    AddTransactionSubTypeChanged event,
+    Emitter<AddTransactionState> emit,
+  ) {
+    emit(state.copyWith(subType: event.subType));
   }
 }

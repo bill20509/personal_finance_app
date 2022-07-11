@@ -122,6 +122,8 @@ class TransactionDetailPageView extends StatelessWidget {
                     ),
                     Text(tx.desc),
                     Text(tx.date.toString()),
+                    Text(tx.mainType),
+                    Text(tx.subType),
                   ],
                 ),
               ),

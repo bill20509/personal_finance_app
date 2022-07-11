@@ -25,3 +25,26 @@ class AddTransactionAmountChanged extends AddTransactionEvent {
   @override
   List<Object> get props => [amount];
 }
+
+class AddTransactionMainTypeChanged extends AddTransactionEvent {
+  const AddTransactionMainTypeChanged(this.mainType);
+  final String mainType;
+
+  @override
+  List<Object> get props => [mainType];
+}
+
+class AddTransactionSubTypeChanged extends AddTransactionEvent {
+  const AddTransactionSubTypeChanged(this.subType);
+  final String subType;
+
+  @override
+  List<Object> get props => [subType];
+}
+
+class AddTransactionDescChanged extends AddTransactionEvent {
+  const AddTransactionDescChanged(this.desc);
+  final String desc;
+  @override
+  List<Object> get props => [desc];
+}

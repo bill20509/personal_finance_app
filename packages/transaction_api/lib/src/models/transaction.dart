@@ -6,6 +6,11 @@ import 'package:uuid/uuid.dart';
 
 part 'transaction.g.dart';
 
+enum TransactionType {
+  income,
+  outcome,
+}
+
 /// model of transaction
 @immutable
 @JsonSerializable()
@@ -17,6 +22,9 @@ class Transaction extends Equatable {
     this.amount = 0,
     this.desc = '',
     required this.date,
+    required this.transactionType,
+    required this.mainType,
+    required this.subType,
   }) : id = id ?? const Uuid().v4();
 
   /// unique id of transaction
@@ -34,6 +42,15 @@ class Transaction extends Equatable {
   /// date
   final DateTime date;
 
+  // trsanction type
+  final TransactionType transactionType;
+
+  // main type, ex: food
+  final String mainType;
+
+  // sub type, ex; dinner
+  final String subType;
+
   /// from json
   static Transaction fromJson(JsonMap json) => _$TransactionFromJson(json);
 
@@ -45,16 +62,23 @@ class Transaction extends Equatable {
     double? amount,
     String? desc,
     DateTime? date,
+    TransactionType? transactionType,
+    String? mainType,
+    String? subType,
   }) {
     return Transaction(
+      id: id ?? this.id,
       title: title ?? this.title,
-      date: date ?? this.date,
       amount: amount ?? this.amount,
       desc: desc ?? this.desc,
-      id: id ?? this.id,
+      date: date ?? this.date,
+      transactionType: transactionType ?? this.transactionType,
+      mainType: mainType ?? this.mainType,
+      subType: subType ?? this.subType,
     );
   }
 
   @override
-  List<Object?> get props => [title, amount, desc, date];
+  List<Object?> get props =>
+      [title, amount, desc, date, transactionType, mainType, subType];
 }

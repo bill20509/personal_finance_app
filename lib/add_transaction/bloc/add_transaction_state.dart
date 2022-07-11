@@ -15,6 +15,9 @@ class AddTransactionState extends Equatable {
     this.amount = 0.0,
     this.desc = '',
     required this.dateTime,
+    this.transactionType = TransactionType.outcome,
+    this.mainType = '',
+    this.subType = '',
   });
   final AddTransactionStatus status;
   final Transaction? initialTx;
@@ -22,6 +25,9 @@ class AddTransactionState extends Equatable {
   final double amount;
   final String desc;
   final DateTime dateTime;
+  final TransactionType transactionType;
+  final String mainType;
+  final String subType;
 
   AddTransactionState copyWith({
     AddTransactionStatus? status,
@@ -30,6 +36,9 @@ class AddTransactionState extends Equatable {
     double? amount,
     String? desc,
     DateTime? dateTime,
+    TransactionType? transactionType,
+    String? mainType,
+    String? subType,
   }) {
     return AddTransactionState(
       status: status ?? this.status,
@@ -38,6 +47,9 @@ class AddTransactionState extends Equatable {
       amount: amount ?? this.amount,
       desc: desc ?? this.desc,
       dateTime: dateTime ?? this.dateTime,
+      transactionType: transactionType ?? this.transactionType,
+      mainType: mainType ?? this.mainType,
+      subType: subType ?? this.subType,
     );
   }
 
@@ -49,5 +61,8 @@ class AddTransactionState extends Equatable {
         amount,
         desc,
         dateTime,
+        transactionType,
+        mainType,
+        subType,
       ];
 }

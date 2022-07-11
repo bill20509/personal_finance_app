@@ -50,19 +50,24 @@ class TransactionOverviewView extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Builder(
-                    builder: (context) {
-                      var count = 0.0;
-                      for (final tx in state.txs) {
-                        count += tx.amount;
-                      }
-                      return Center(
-                        child: Text('total amount: $count}'),
-                      );
-                    },
-                  ),
+                Builder(
+                  builder: (context) {
+                    var count = 0.0;
+                    for (final tx in state.txs) {
+                      count += tx.amount;
+                    }
+                    return Column(
+                      children: [
+                        CalendarDatePicker(
+                          firstDate: DateTime(2020),
+                          initialDate: DateTime(2021),
+                          lastDate: DateTime(2025),
+                          onDateChanged: (date) => print(date),
+                        ),
+                        Text('total amount: $count')
+                      ],
+                    );
+                  },
                 ),
                 Expanded(
                   flex: 2,

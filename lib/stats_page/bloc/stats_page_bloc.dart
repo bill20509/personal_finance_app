@@ -9,7 +9,25 @@ class StatsPageBloc extends Bloc<StatsPageEvent, StatsPageState> {
   StatsPageBloc({
     required TransactionRepository transactionRepository,
   })  : _transactionRepository = transactionRepository,
-        super(const StatsPageState()) {}
+        super(const StatsPageState()) {
+    on<StatsPageSubscriptionRequested>(_onSubscriptionRequested);
+  }
 
   final TransactionRepository _transactionRepository;
+  Future<void> _onSubscriptionRequested(
+    StatsPageSubscriptionRequested event,
+    Emitter<StatsPageState> emit,
+  ) async {
+    emit(state.copyWith(status: StatsPageStatus.loading));
+    await emit.forEach<List<Transaction>>(
+      _transactionRepository.getTransactions(),
+      onData: (data) => state.copyWith(
+        status: StatsPageStatus.success,
+        txs: data,
+      ),
+      onError: (_, __) => state.copyWith(
+        status: StatsPageStatus.fail,
+      ),
+    );
+  }
 }
