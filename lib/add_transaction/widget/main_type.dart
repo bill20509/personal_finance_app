@@ -7,7 +7,7 @@ class MainType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final main_type = [
+    final mainType = [
       'food',
       'traffic',
       'game',
@@ -56,18 +56,18 @@ class MainType extends StatelessWidget {
                         ),
                         Expanded(
                           child: ListView.builder(
-                            itemCount: main_type.length,
+                            itemCount: mainType.length,
                             itemBuilder: (context, index) {
                               return Container(
                                 child: Column(
                                   children: [
                                     ListTile(
                                       leading: Icon(Icons.dinner_dining),
-                                      title: Text(main_type[index]),
+                                      title: Text(mainType[index]),
                                       onTap: () {
                                         Navigator.pop(
                                           context,
-                                          main_type[index],
+                                          mainType[index],
                                         );
                                       },
                                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/add_transaction/bloc/add_transaction_bloc.dart';
+import 'package:personal_finance_app/add_transaction/widget/date_select.dart';
 import 'package:personal_finance_app/add_transaction/widget/desc_field.dart';
 import 'package:personal_finance_app/add_transaction/widget/sub_type.dart';
 import 'package:transaction_repository/transaction_repository.dart';
@@ -82,6 +83,7 @@ class AddTransactionView extends StatelessWidget {
                     const MainType(),
                     const SubType(),
                     const DescType(),
+                    const DateSelect(),
                   ],
                 ),
               ),
