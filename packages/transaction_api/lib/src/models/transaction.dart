@@ -6,8 +6,12 @@ import 'package:uuid/uuid.dart';
 
 part 'transaction.g.dart';
 
+/// Trasanction Type
 enum TransactionType {
+  /// Trasanction Type for income
   income,
+
+  /// Trasanction Type for outcome
   outcome,
 }
 
@@ -42,13 +46,13 @@ class Transaction extends Equatable {
   /// date
   final DateTime date;
 
-  // trsanction type
+  /// trsanction type
   final TransactionType transactionType;
 
-  // main type, ex: food
+  /// main type, ex: food
   final String mainType;
 
-  // sub type, ex; dinner
+  /// sub type, ex; dinner
   final String subType;
 
   /// from json
@@ -56,6 +60,8 @@ class Transaction extends Equatable {
 
   /// to Json
   JsonMap toJson() => _$TransactionToJson(this);
+
+  /// copy method
   Transaction copyWith({
     String? id,
     String? title,
@@ -79,6 +85,13 @@ class Transaction extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [title, amount, desc, date, transactionType, mainType, subType];
+  List<Object?> get props => [
+        title,
+        amount,
+        desc,
+        date,
+        transactionType,
+        mainType,
+        subType,
+      ];
 }

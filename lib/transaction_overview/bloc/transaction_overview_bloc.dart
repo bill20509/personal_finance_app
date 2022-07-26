@@ -15,6 +15,7 @@ class TransactionBloc
         super(const TransactionOverviewState()) {
     on<TransactionOverviewSubscriptionRequested>(_onSubscriptionRequested);
     on<TransactionOverviewDeleteRequested>(_onTransactionDeleteRequested);
+    on<TransactionOverviewChangeDate>(_onTransactionChangeDate);
   }
   final TransactionRepository _transactionRepository;
 
@@ -46,5 +47,18 @@ class TransactionBloc
     } catch (e) {
       emit(state.copyWith(status: TransactionOverviewStatus.fail));
     }
+  }
+
+  Future<void> _onTransactionChangeDate(
+    TransactionOverviewChangeDate event,
+    Emitter<TransactionOverviewState> emit,
+  ) async {
+    emit(state.copyWith(status: TransactionOverviewStatus.loading));
+    emit(
+      state.copyWith(
+        currentDate: event.currentDate,
+        status: TransactionOverviewStatus.success,
+      ),
+    );
   }
 }

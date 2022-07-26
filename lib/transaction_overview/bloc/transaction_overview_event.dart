@@ -15,3 +15,8 @@ class TransactionOverviewDeleteRequested extends TransactionOverviewEvent {
   const TransactionOverviewDeleteRequested(this.tx);
   final Transaction tx;
 }
+
+class TransactionOverviewChangeDate extends TransactionOverviewEvent {
+  const TransactionOverviewChangeDate(this.currentDate);
+  final DateTime currentDate;
+}

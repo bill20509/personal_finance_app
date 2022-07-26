@@ -2,27 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
-import 'package:transaction_api/transaction_api.dart';
+import 'package:personal_finance_app/transaction_overview/widget/trnsaction_card.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
-import '../widget/trnsaction_card.dart';
-
 class TransactionOverviewPage extends StatelessWidget {
-  const TransactionOverviewPage({Key? key}) : super(key: key);
+  const TransactionOverviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TransactionBloc(
         transactionRepository: context.read<TransactionRepository>(),
-      )..add(const TransactionOverviewSubscriptionRequested()),
+      )
+        ..add(const TransactionOverviewSubscriptionRequested())
+        ..add(TransactionOverviewChangeDate(DateTime.now())),
       child: const TransactionOverviewView(),
     );
   }
 }
 
 class TransactionOverviewView extends StatelessWidget {
-  const TransactionOverviewView({Key? key}) : super(key: key);
+  const TransactionOverviewView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +60,14 @@ class TransactionOverviewView extends StatelessWidget {
                       children: [
                         CalendarDatePicker(
                           firstDate: DateTime(2020),
-                          initialDate: DateTime(2021),
+                          initialDate: DateTime.now(),
                           lastDate: DateTime(2025),
-                          onDateChanged: (date) => print(date),
+                          onDateChanged: (date) => context
+                              .read<TransactionBloc>()
+                              .add(TransactionOverviewChangeDate(date)),
                         ),
-                        Text('total amount: $count')
+                        Text('total amount: $count'),
+                        Text('date: ${state.currentDate.toString()}')
                       ],
                     );
                   },
@@ -75,10 +78,17 @@ class TransactionOverviewView extends StatelessWidget {
                     builder: (context) {
                       if (state.txs.isEmpty) return const Text("It's empty");
                       return CupertinoScrollbar(
-                        child: ListView(
-                          children: [
-                            for (final tx in state.txs) TransactionCard(tx: tx),
-                          ],
+                        child: ListView.builder(
+                          itemCount: state.txs.length,
+                          itemBuilder: (context, index) {
+                            final d = state.txs[index].date;
+                            if (d.day == state.currentDate?.day &&
+                                d.month == state.currentDate?.month &&
+                                d.year == state.currentDate?.year) {
+                              return TransactionCard(tx: state.txs[index]);
+                            }
+                            return Container();
+                          },
                         ),
                       );
                     },

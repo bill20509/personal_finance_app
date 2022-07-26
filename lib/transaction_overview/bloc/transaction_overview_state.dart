@@ -12,19 +12,23 @@ class TransactionOverviewState extends Equatable {
     this.status = TransactionOverviewStatus.initial,
     this.txs = const [],
     this.lastestDeletedTx,
+    this.currentDate,
   });
   final TransactionOverviewStatus status;
   final List<Transaction> txs;
   final Transaction? lastestDeletedTx;
+  final DateTime? currentDate;
   TransactionOverviewState copyWith({
     TransactionOverviewStatus? status,
     List<Transaction>? txs,
     Transaction? lastestDeletedTx,
+    DateTime? currentDate,
   }) {
     return TransactionOverviewState(
       status: status ?? this.status,
       txs: txs ?? this.txs,
       lastestDeletedTx: lastestDeletedTx ?? this.lastestDeletedTx,
+      currentDate: currentDate ?? this.currentDate,
     );
   }
 
@@ -33,5 +37,6 @@ class TransactionOverviewState extends Equatable {
         status,
         txs,
         lastestDeletedTx,
+        currentDate,
       ];
 }
