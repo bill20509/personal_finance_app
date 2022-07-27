@@ -8,7 +8,7 @@ enum AddTransactionStatus {
 }
 
 class AddTransactionState extends Equatable {
-  AddTransactionState({
+  const AddTransactionState({
     this.status = AddTransactionStatus.initial,
     this.initialTx,
     this.title = '',
@@ -18,6 +18,7 @@ class AddTransactionState extends Equatable {
     this.transactionType = TransactionType.outcome,
     this.mainType = '',
     this.subType = '',
+    this.selectImagePath,
   });
   final AddTransactionStatus status;
   final Transaction? initialTx;
@@ -28,7 +29,7 @@ class AddTransactionState extends Equatable {
   final TransactionType transactionType;
   final String mainType;
   final String subType;
-
+  final String? selectImagePath;
   AddTransactionState copyWith({
     AddTransactionStatus? status,
     Transaction? initialTx,
@@ -39,6 +40,7 @@ class AddTransactionState extends Equatable {
     TransactionType? transactionType,
     String? mainType,
     String? subType,
+    String? selectImagePath,
   }) {
     return AddTransactionState(
       status: status ?? this.status,
@@ -50,6 +52,7 @@ class AddTransactionState extends Equatable {
       transactionType: transactionType ?? this.transactionType,
       mainType: mainType ?? this.mainType,
       subType: subType ?? this.subType,
+      selectImagePath: selectImagePath ?? this.selectImagePath,
     );
   }
 
@@ -64,5 +67,6 @@ class AddTransactionState extends Equatable {
         transactionType,
         mainType,
         subType,
+        selectImagePath,
       ];
 }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/add_transaction/bloc/add_transaction_bloc.dart';
 
 class MainType extends StatelessWidget {
-  const MainType({Key? key}) : super(key: key);
+  const MainType({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,22 +58,20 @@ class MainType extends StatelessWidget {
                           child: ListView.builder(
                             itemCount: mainType.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      leading: Icon(Icons.dinner_dining),
-                                      title: Text(mainType[index]),
-                                      onTap: () {
-                                        Navigator.pop(
-                                          context,
-                                          mainType[index],
-                                        );
-                                      },
-                                    ),
-                                    Divider(),
-                                  ],
-                                ),
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    leading: const Icon(Icons.dinner_dining),
+                                    title: Text(mainType[index]),
+                                    onTap: () {
+                                      Navigator.pop(
+                                        context,
+                                        mainType[index],
+                                      );
+                                    },
+                                  ),
+                                  const Divider(),
+                                ],
                               );
                             },
                           ),

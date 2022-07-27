@@ -21,6 +21,8 @@ class AddTransactionBloc
     on<AddTransactionTitleChanged>(_onTitleChanged);
     on<AddTransactionMainTypeChanged>(_onMainTypeChanged);
     on<AddTransactionSubTypeChanged>(_onSubTypeChanged);
+    on<AddTransactionDateChanged>(_onDateChanged);
+    on<AddTransactionPhotoChanged>(_onSelectImageChanged);
   }
   final TransactionRepository _transactionRepository;
   Future<void> _onSubmitted(
@@ -71,5 +73,15 @@ class AddTransactionBloc
     Emitter<AddTransactionState> emit,
   ) {
     emit(state.copyWith(subType: event.subType));
+  }
+
+  void _onDateChanged(
+      AddTransactionDateChanged event, Emitter<AddTransactionState> emit) {
+    emit(state.copyWith(dateTime: event.date));
+  }
+
+  void _onSelectImageChanged(
+      AddTransactionPhotoChanged event, Emitter<AddTransactionState> emit) {
+    emit(state.copyWith(selectImagePath: event.selectImagePath));
   }
 }

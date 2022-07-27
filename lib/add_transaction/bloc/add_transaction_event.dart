@@ -48,3 +48,17 @@ class AddTransactionDescChanged extends AddTransactionEvent {
   @override
   List<Object> get props => [desc];
 }
+
+class AddTransactionDateChanged extends AddTransactionEvent {
+  const AddTransactionDescChanged(this.desc);
+  final String desc;
+  @override
+  List<Object> get props => [desc];
+}
+
+class AddTransactionPhotoChanged extends AddTransactionEvent {
+  const AddTransactionPhotoChanged(this.selectImagePath);
+  final String selectImagePath;
+  @override
+  List<Object> get props => [selectImagePath];
+}

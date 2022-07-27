@@ -49,7 +49,6 @@ class AddTransactionView extends StatelessWidget {
                 context
                     .read<AddTransactionBloc>()
                     .add(const AddTransactionSubmitted());
-                print(context.read<AddTransactionBloc>().state.dateTime);
               },
               icon: const Icon(Icons.check),
             ),
