@@ -66,8 +66,6 @@ class TransactionOverviewView extends StatelessWidget {
                               .read<TransactionBloc>()
                               .add(TransactionOverviewChangeDate(date)),
                         ),
-                        Text('total amount: $count'),
-                        Text('date: ${state.currentDate.toString()}')
                       ],
                     );
                   },
@@ -76,7 +74,9 @@ class TransactionOverviewView extends StatelessWidget {
                   flex: 2,
                   child: Builder(
                     builder: (context) {
-                      if (state.txs.isEmpty) return const Text("It's empty");
+                      if (state.txs.isEmpty) {
+                        return const Center(child: Text("It's empty"));
+                      }
                       return CupertinoScrollbar(
                         child: ListView.builder(
                           itemCount: state.txs.length,
