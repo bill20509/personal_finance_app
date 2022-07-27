@@ -38,6 +38,7 @@ class AddTransactionBloc
       transactionType: state.transactionType,
       mainType: state.mainType,
       subType: state.subType,
+      imagePath: state.selectImagePath,
     );
     try {
       await _transactionRepository.saveTransaction(tx);

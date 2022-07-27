@@ -50,10 +50,10 @@ class AddTransactionDescChanged extends AddTransactionEvent {
 }
 
 class AddTransactionDateChanged extends AddTransactionEvent {
-  const AddTransactionDescChanged(this.desc);
-  final String desc;
+  const AddTransactionDateChanged(this.date);
+  final DateTime date;
   @override
-  List<Object> get props => [desc];
+  List<Object> get props => [date];
 }
 
 class AddTransactionPhotoChanged extends AddTransactionEvent {

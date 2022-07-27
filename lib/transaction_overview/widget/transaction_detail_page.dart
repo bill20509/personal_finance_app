@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 import 'package:transaction_api/transaction_api.dart';
 
 class TransactionDetailPage extends StatelessWidget {
@@ -42,7 +45,7 @@ class TransactionDetailPageView extends StatelessWidget {
                             children: [
                               IconButton(
                                 onPressed: () => Navigator.pop(context, 0),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.clear_rounded,
                                 ),
                                 color: Colors.white,
@@ -70,10 +73,17 @@ class TransactionDetailPageView extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
-                              child: Icon(
-                                Icons.dinner_dining,
-                                color: Colors.white,
-                              ),
+                              child: Builder(builder: (context) {
+                                if (tx.imagePath == null) {
+                                  return const Icon(
+                                    Icons.dinner_dining,
+                                    color: Colors.white,
+                                  );
+                                }
+                                return Image.file(
+                                  File(tx.imagePath!),
+                                );
+                              }),
                             ),
                           ),
                         ],
@@ -103,7 +113,7 @@ class TransactionDetailPageView extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.local_drink,
                         color: Colors.white,
                       ),
@@ -115,13 +125,15 @@ class TransactionDetailPageView extends StatelessWidget {
                         Text('+ ${tx.amount} \$'),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 3,
                       height: 20,
                       color: Colors.black,
                     ),
                     Text(tx.desc),
-                    Text(tx.date.toString()),
+                    Center(
+                      child: Text(DateFormat('yyyy-MM-dd').format(tx.date)),
+                    ),
                     Text(tx.mainType),
                     Text(tx.subType),
                   ],

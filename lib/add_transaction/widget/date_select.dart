@@ -23,7 +23,7 @@ class DateSelect extends StatelessWidget {
         Expanded(
           flex: 2,
           child: BlocBuilder<AddTransactionBloc, AddTransactionState>(
-            builder: (context, state) {
+            builder: (cxt, state) {
               return GestureDetector(
                 onTap: () async {
                   await showDialog<DateTime>(
@@ -35,10 +35,10 @@ class DateSelect extends StatelessWidget {
                         child: CalendarDatePicker(
                           firstDate: DateTime(2020),
                           initialDate:
-                              context.read<AddTransactionState>().dateTime,
+                              cxt.read<AddTransactionBloc>().state.dateTime,
                           lastDate: DateTime(2025),
                           onDateChanged: (date) {
-                            context
+                            cxt
                                 .read<AddTransactionBloc>()
                                 .add(AddTransactionDateChanged(date));
                             Navigator.of(context).pop();
@@ -61,7 +61,7 @@ class DateSelect extends StatelessWidget {
                         final today = DateTime.now();
                         var txt = '今天';
                         final currentDate =
-                            context.read<AddTransactionState>().dateTime;
+                            context.read<AddTransactionBloc>().state.dateTime;
                         if (currentDate.day != today.day ||
                             currentDate.month != today.month ||
                             currentDate.year != today.year) {

@@ -35,6 +35,7 @@ class MainType extends StatelessWidget {
           flex: 2,
           child: GestureDetector(
             onTap: () async {
+              final bloc = context.read<AddTransactionBloc>();
               final result = await showDialog<String>(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -82,9 +83,7 @@ class MainType extends StatelessWidget {
                 ),
               );
               if (result != null) {
-                context
-                    .read<AddTransactionBloc>()
-                    .add(AddTransactionMainTypeChanged(result));
+                bloc.add(AddTransactionMainTypeChanged(result));
               }
             },
             child: Container(
@@ -94,8 +93,8 @@ class MainType extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               child: BlocBuilder<AddTransactionBloc, AddTransactionState>(
                 builder: (context, state) {
                   return Text(

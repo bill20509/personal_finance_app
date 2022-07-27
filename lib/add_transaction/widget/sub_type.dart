@@ -50,8 +50,8 @@ class SubType extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         ListTile(
-                          leading: Icon(Icons.add),
-                          title: Text('Add new Sub type'),
+                          leading: const Icon(Icons.add),
+                          title: const Text('Add new Sub type'),
                           onTap: () {},
                         ),
                         Expanded(

@@ -86,7 +86,6 @@ class AddTransactionView extends StatelessWidget {
                   ],
                 ),
               ),
-              // DatePicker(),
             ],
           ),
         ),
