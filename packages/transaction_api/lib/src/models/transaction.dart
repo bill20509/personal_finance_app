@@ -23,6 +23,7 @@ class Transaction extends Equatable {
   Transaction({
     String? id,
     required this.title,
+    this.imagePath,
     this.amount = 0,
     this.desc = '',
     required this.date,
@@ -55,6 +56,9 @@ class Transaction extends Equatable {
   /// sub type, ex; dinner
   final String subType;
 
+  /// image path
+  final String? imagePath;
+
   /// from json
   static Transaction fromJson(JsonMap json) => _$TransactionFromJson(json);
 
@@ -71,6 +75,7 @@ class Transaction extends Equatable {
     TransactionType? transactionType,
     String? mainType,
     String? subType,
+    String? imagePath,
   }) {
     return Transaction(
       id: id ?? this.id,
@@ -81,6 +86,7 @@ class Transaction extends Equatable {
       transactionType: transactionType ?? this.transactionType,
       mainType: mainType ?? this.mainType,
       subType: subType ?? this.subType,
+      imagePath: imagePath ?? this.imagePath,
     );
   }
 
@@ -93,5 +99,6 @@ class Transaction extends Equatable {
         transactionType,
         mainType,
         subType,
+        imagePath,
       ];
 }

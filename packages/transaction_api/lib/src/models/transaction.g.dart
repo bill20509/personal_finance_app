@@ -9,6 +9,7 @@ part of 'transaction.dart';
 Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       id: json['id'] as String?,
       title: json['title'] as String,
+      imagePath: json['imagePath'] as String?,
       amount: (json['amount'] as num?)?.toDouble() ?? 0,
       desc: json['desc'] as String? ?? '',
       date: DateTime.parse(json['date'] as String),
@@ -25,9 +26,10 @@ Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
       'amount': instance.amount,
       'desc': instance.desc,
       'date': instance.date.toIso8601String(),
-      'transactionType': _$TransactionTypeEnumMap[instance.transactionType],
+      'transactionType': _$TransactionTypeEnumMap[instance.transactionType]!,
       'mainType': instance.mainType,
       'subType': instance.subType,
+      'imagePath': instance.imagePath,
     };
 
 const _$TransactionTypeEnumMap = {
