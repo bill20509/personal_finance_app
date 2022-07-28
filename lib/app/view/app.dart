@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:personal_finance_app/home/home.dart';
 import 'package:personal_finance_app/l10n/l10n.dart';
+import 'package:personal_finance_app/login_page/view/login_page.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
 class App extends StatelessWidget {
@@ -31,14 +32,14 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyText1: TextStyle(
             fontSize: 20,
           ),
         ),
         appBarTheme: const AppBarTheme(color: Color.fromARGB(255, 2, 37, 52)),
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: Color.fromARGB(255, 2, 37, 52),
+          accentColor: const Color.fromARGB(255, 2, 37, 52),
         ),
       ),
       localizationsDelegates: const [
@@ -46,7 +47,7 @@ class AppView extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const HomePage(),
+      home: LoginPage(),
     );
   }
 }

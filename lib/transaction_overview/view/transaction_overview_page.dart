@@ -50,25 +50,13 @@ class TransactionOverviewView extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                Builder(
-                  builder: (context) {
-                    var count = 0.0;
-                    for (final tx in state.txs) {
-                      count += tx.amount;
-                    }
-                    return Column(
-                      children: [
-                        CalendarDatePicker(
-                          firstDate: DateTime(2020),
-                          initialDate: DateTime.now(),
-                          lastDate: DateTime(2025),
-                          onDateChanged: (date) => context
-                              .read<TransactionBloc>()
-                              .add(TransactionOverviewChangeDate(date)),
-                        ),
-                      ],
-                    );
-                  },
+                CalendarDatePicker(
+                  firstDate: DateTime(2020),
+                  initialDate: DateTime.now(),
+                  lastDate: DateTime(2025),
+                  onDateChanged: (date) => context
+                      .read<TransactionBloc>()
+                      .add(TransactionOverviewChangeDate(date)),
                 ),
                 Expanded(
                   flex: 2,

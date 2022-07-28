@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/stats_page/bloc/stats_page_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
-import 'package:transaction_api/transaction_api.dart';
-import 'package:transaction_repository/transaction_repository.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:transaction_repository/transaction_repository.dart';
 
 class StatsPage extends StatelessWidget {
   const StatsPage({super.key});

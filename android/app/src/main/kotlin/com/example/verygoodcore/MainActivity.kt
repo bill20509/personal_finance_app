@@ -1,4 +1,4 @@
-package com.example.verygoodcore.personal_finance_app
+package com.billchung.personal_finance_app
 
 import io.flutter.embedding.android.FlutterActivity
 

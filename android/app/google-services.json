@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "485371616027",
+    "project_id": "personal-finance-flutter",
+    "storage_bucket": "personal-finance-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485371616027:android:42e8a4369cd1a1ffe5d1be",
+        "android_client_info": {
+          "package_name": "com.billchung.personal_finance_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485371616027-mskuccfhrtftqg6m606tavfmb1igu0lt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNDRTcdmX5Gb0Tc3Y4ePO753gB-nzVsvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485371616027-mskuccfhrtftqg6m606tavfmb1igu0lt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
