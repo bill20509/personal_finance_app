@@ -30,9 +30,9 @@ class StatsPageView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('stats'),
       ),
-      body: BlocBuilder<TransactionBloc, TransactionOverviewState>(
+      body: BlocBuilder<StatsPageBloc, StatsPageState>(
         builder: (context, state) {
-          final txsList = context.read<TransactionBloc>().state.txs;
+          final txsList = context.read<StatsPageBloc>().state.txs;
           final dataMap = <String, double>{};
           var totalValue = 0.0;
           for (final tx in txsList) {

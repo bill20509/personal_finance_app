@@ -18,8 +18,12 @@ class App extends StatelessWidget {
   final TransactionRepository transactionRepository;
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: transactionRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<TransactionRepository>.value(
+          value: transactionRepository,
+        ),
+      ],
       child: const AppView(),
     );
   }

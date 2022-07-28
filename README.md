@@ -13,7 +13,8 @@ A Very Good Project created by Very Good CLI.
 - i10n
 - more stats analyze
 - upload DB to cloud
-- account auth 
+- account auth [Processing]
+    - States management
 ## Getting Started 🚀
 
 This project contains 3 flavors:

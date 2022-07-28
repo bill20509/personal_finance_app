@@ -7,15 +7,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthRepository _authRepository = AuthRepository();
+    final _authRepository = AuthRepository();
     return FutureBuilder(
       future: _authRepository.signInWithGoogleCheck(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.connectionState == ConnectionState.done &&
+        if (snapshot.connectionState == ConnectionState.done &&
             snapshot.data == false) {
           return LoginPageView();
         } else if (snapshot.connectionState == ConnectionState.done &&
