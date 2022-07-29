@@ -24,8 +24,8 @@ class AuthRepository implements AuthRepositoryImpl {
     return true;
   }
 
-  Future<GoogleSignInAccount?> googleAccount() async {
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+  GoogleSignInAccount? googleAccount() {
+    final GoogleSignInAccount? googleUser = _googleSignIn.currentUser;
     return googleUser;
   }
 

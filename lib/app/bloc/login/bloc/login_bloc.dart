@@ -23,7 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     emit(state.copyWith(status: LoginStatus.loading));
     try {
-      final account = await _authRepository.googleAccount();
+      final account = _authRepository.googleAccount();
       if (account != null) {
         emit(state.copyWith(status: LoginStatus.login, account: account));
       } else {
@@ -41,11 +41,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: LoginStatus.loading));
     try {
       final check = await _authRepository.signInWithGoogle();
+      final account = _authRepository.googleAccount();
       if (check) {
         emit(
           state.copyWith(
             status: LoginStatus.login,
-            // account: account,
+            account: account,
           ),
         );
       } else {

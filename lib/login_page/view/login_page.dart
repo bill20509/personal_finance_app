@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('LoginPage')),
       body: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           if (state.status == LoginStatus.loading) {
@@ -37,7 +38,7 @@ class LoginPageView extends StatelessWidget {
     return Center(
       child: TextButton(
         onPressed: () async {
-          final ctx = Navigator.of(context);
+          final nav = Navigator.of(context);
           final ok = await _authRepository.signInWithGoogle();
           if (ok) {
             await nav.pushReplacement(
