@@ -11,9 +11,9 @@ import 'dart:developer';
 import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:personal_finance_app/app/app.dart';
 import 'package:transaction_api/transaction_api.dart';
 import 'package:transaction_repository/transaction_repository.dart';
-import 'app/app.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override

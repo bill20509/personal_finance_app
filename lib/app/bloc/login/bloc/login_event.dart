@@ -9,3 +9,11 @@ abstract class LoginEvent extends Equatable {
 class LoginStateRequested extends LoginEvent {
   const LoginStateRequested();
 }
+
+class GoogleLoginRequested extends LoginEvent {
+  const GoogleLoginRequested();
+}
+
+class LogoutRequested extends LoginEvent {
+  const LogoutRequested();
+}

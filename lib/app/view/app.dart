@@ -9,6 +9,7 @@ import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:personal_finance_app/app/bloc/login/bloc/login_bloc.dart';
 import 'package:personal_finance_app/home/home.dart';
 import 'package:personal_finance_app/l10n/l10n.dart';
 import 'package:personal_finance_app/login_page/view/login_page.dart';
@@ -33,7 +34,12 @@ class App extends StatelessWidget {
           value: authRepository,
         ),
       ],
-      child: const AppView(),
+      child: BlocProvider(
+        create: (BuildContext context) =>
+            LoginBloc(authRepository: context.read<AuthRepository>())
+              ..add(const LoginStateRequested()),
+        child: const AppView(),
+      ),
     );
   }
 }
@@ -60,7 +66,7 @@ class AppView extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }

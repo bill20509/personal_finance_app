@@ -2,8 +2,8 @@ part of 'login_bloc.dart';
 
 enum LoginStatus {
   logout,
-  loading,
   login,
+  loading,
   fail,
 }
 
@@ -17,6 +17,8 @@ class LoginState extends Equatable {
 
   LoginState copyWith({
     LoginStatus? status,
+
+    /// probably need to clean this
     GoogleSignInAccount? account,
   }) {
     return LoginState(

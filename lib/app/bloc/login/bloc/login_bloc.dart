@@ -1,6 +1,5 @@
 import 'package:auth_repository/auth_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -13,6 +12,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   })  : _authRepository = authRepository,
         super(const LoginState()) {
     on<LoginStateRequested>(onLoginStateRequested);
+    on<GoogleLoginRequested>(onGoogleLoginRequested);
+    on<LogoutRequested>(onLogoutRequested);
   }
   final AuthRepository _authRepository;
 
@@ -28,6 +29,39 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } else {
         emit(state.copyWith(status: LoginStatus.logout));
       }
+    } catch (e) {
+      emit(state.copyWith(status: LoginStatus.fail));
+    }
+  }
+
+  Future<void> onGoogleLoginRequested(
+    GoogleLoginRequested event,
+    Emitter<LoginState> emit,
+  ) async {
+    emit(state.copyWith(status: LoginStatus.loading));
+    try {
+      final check = await _authRepository.signInWithGoogle();
+      if (check) {
+        emit(
+          state.copyWith(
+            status: LoginStatus.login,
+            // account: account,
+          ),
+        );
+      } else {
+        emit(state.copyWith(status: LoginStatus.logout));
+      }
+    } catch (e) {
+      emit(state.copyWith(status: LoginStatus.fail));
+    }
+  }
+
+  Future<void> onLogoutRequested(
+      LogoutRequested event, Emitter<LoginState> emit) async {
+    emit(state.copyWith(status: LoginStatus.loading));
+    try {
+      await _authRepository.signOut();
+      emit(state.copyWith(status: LoginStatus.logout));
     } catch (e) {
       emit(state.copyWith(status: LoginStatus.fail));
     }
