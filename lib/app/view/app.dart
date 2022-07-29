@@ -5,6 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:auth_repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,14 +15,22 @@ import 'package:personal_finance_app/login_page/view/login_page.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key, required this.transactionRepository}) : super(key: key);
+  const App({
+    Key? key,
+    required this.transactionRepository,
+    required this.authRepository,
+  }) : super(key: key);
   final TransactionRepository transactionRepository;
+  final AuthRepository authRepository;
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<TransactionRepository>.value(
           value: transactionRepository,
+        ),
+        RepositoryProvider<AuthRepository>.value(
+          value: authRepository,
         ),
       ],
       child: const AppView(),

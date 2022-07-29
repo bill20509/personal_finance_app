@@ -8,6 +8,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:auth_repository/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:transaction_api/transaction_api.dart';
@@ -34,12 +35,14 @@ void bootstrap({required TransactionApi transactionApi}) {
   };
   final transactionRepository =
       TransactionRepository(transactionApi: transactionApi);
+  final authRepository = AuthRepository();
   runZonedGuarded(
     () async {
       await BlocOverrides.runZoned(
         () async => runApp(
           App(
             transactionRepository: transactionRepository,
+            authRepository: authRepository,
           ),
         ),
         blocObserver: AppBlocObserver(),

@@ -40,5 +40,7 @@ dev_dependencies:
   very_good_analysis: ^3.0.0
 
 flutter:
+  assets:
+    - assets/user_page/user.png
   uses-material-design: true
   generate: true

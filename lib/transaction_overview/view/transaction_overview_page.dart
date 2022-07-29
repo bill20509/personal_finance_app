@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
+import 'package:personal_finance_app/transaction_overview/widget/drawer.dart';
 import 'package:personal_finance_app/transaction_overview/widget/trnsaction_card.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
@@ -30,34 +31,7 @@ class TransactionOverviewView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Overview'),
       ),
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const UserDrawer(),
       body: MultiBlocListener(
         listeners: [
           BlocListener<TransactionBloc, TransactionOverviewState>(
