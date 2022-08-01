@@ -8,6 +8,7 @@ class UserDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const l = [1, 2, 3, 4, 5, 6, 7, 7, 8, 8, 9, 9, 0];
+
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
         return Drawer(
@@ -19,8 +20,8 @@ class UserDrawer extends StatelessWidget {
                   decoration: const BoxDecoration(
                     color: Colors.blue,
                   ),
-                  child: state.status == LoginStatus.login
-                      // state.account?.photoUrl != null
+                  child: state.status == LoginStatus.login &&
+                          state.account?.photoUrl != null
                       ? Center(
                           child: CircleAvatar(
                             radius: 30,

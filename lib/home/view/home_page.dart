@@ -5,7 +5,6 @@ import 'package:personal_finance_app/home/cubit/home_cubit.dart';
 import 'package:personal_finance_app/stats_page/stats_page.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/transaction_overview_page.dart';
-import 'package:personal_finance_app/user_page/view/user_page.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
 class HomePage extends StatelessWidget {
@@ -45,7 +44,6 @@ class HomeView extends StatelessWidget {
         children: const [
           TransactionOverviewPage(),
           StatsPage(),
-          UserPage(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -67,11 +65,6 @@ class HomeView extends StatelessWidget {
             _HomeTabButton(
               groupValue: selectTab,
               value: HomeTab.stats,
-              icon: const Icon(Icons.show_chart_rounded),
-            ),
-            _HomeTabButton(
-              groupValue: selectTab,
-              value: HomeTab.user,
               icon: const Icon(Icons.show_chart_rounded),
             ),
           ],

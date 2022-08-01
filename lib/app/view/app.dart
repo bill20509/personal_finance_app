@@ -67,7 +67,7 @@ class AppView extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }

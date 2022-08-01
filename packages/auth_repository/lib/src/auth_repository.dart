@@ -25,8 +25,11 @@ class AuthRepository implements AuthRepositoryImpl {
   }
 
   GoogleSignInAccount? getGoogleAccount() {
-    final googleUser = _googleSignIn.currentUser;
-    return googleUser;
+    return _googleSignIn.currentUser;
+  }
+
+  Future<bool> isGoogleAccountSignedIn() {
+    return _googleSignIn.isSignedIn();
   }
 
   @override

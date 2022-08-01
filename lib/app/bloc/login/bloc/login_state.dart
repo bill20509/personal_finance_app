@@ -28,5 +28,5 @@ class LoginState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [account, status];
+  List<Object?> get props => [account.toString(), status];
 }

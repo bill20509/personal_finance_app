@@ -20,12 +20,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> onLoginStateRequested(
     LoginStateRequested event,
     Emitter<LoginState> emit,
-  ) async {}
+  ) async {
+    emit(state.copyWith(status: LoginStatus.loading));
+    final check1 = await _authRepository.isGoogleAccountSignedIn();
+    final check2 = await _authRepository.signInWithGoogle();
+    if (check1 && check2) {
+      emit(
+        state.copyWith(
+          status: LoginStatus.login,
+          account: _authRepository.getGoogleAccount(),
+        ),
+      );
+    } else {
+      emit(state.copyWith(status: LoginStatus.logout));
+    }
+  }
+
   Future<void> onGoogleLoginRequested(
     GoogleLoginRequested event,
     Emitter<LoginState> emit,
   ) async {
     emit(state.copyWith(status: LoginStatus.loading));
+
     try {
       final check = await _authRepository.signInWithGoogle();
       if (check) {
@@ -44,7 +60,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> onLogoutRequested(
-      LogoutRequested event, Emitter<LoginState> emit) async {
+    LogoutRequested event,
+    Emitter<LoginState> emit,
+  ) async {
     emit(state.copyWith(status: LoginStatus.loading));
     try {
       await _authRepository.signOut();
