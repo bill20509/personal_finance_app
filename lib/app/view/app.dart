@@ -23,6 +23,7 @@ class App extends StatelessWidget {
   }) : super(key: key);
   final TransactionRepository transactionRepository;
   final AuthRepository authRepository;
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(

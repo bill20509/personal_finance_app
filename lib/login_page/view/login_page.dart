@@ -11,16 +11,21 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('LoginPage')),
-      body: BlocBuilder<LoginBloc, LoginState>(
+      body: BlocConsumer<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state.status == LoginStatus.login) {
+            Navigator.of(context).pushReplacement(
+              HomePage.route(),
+            );
+          }
+        },
         builder: (context, state) {
           if (state.status == LoginStatus.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state.status == LoginStatus.logout) {
-            return LoginPageView();
-          } else if (state.status == LoginStatus.login) {
-            return const HomePage();
+            return const LoginPageView();
           }
           return Container();
         },
@@ -30,23 +35,16 @@ class LoginPage extends StatelessWidget {
 }
 
 class LoginPageView extends StatelessWidget {
-  LoginPageView({super.key});
-  final AuthRepository _authRepository = AuthRepository();
+  const LoginPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: TextButton(
-        onPressed: () async {
-          final nav = Navigator.of(context);
-          final ok = await _authRepository.signInWithGoogle();
-          if (ok) {
-            await nav.pushReplacement(
-              HomePage.route(),
-            );
-          }
+        onPressed: () {
+          context.read<LoginBloc>().add(const GoogleLoginRequested());
         },
-        child: Text("SIGN IN"),
+        child: const Text("SIGN IN"),
       ),
     );
   }

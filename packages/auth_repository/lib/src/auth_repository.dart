@@ -24,15 +24,14 @@ class AuthRepository implements AuthRepositoryImpl {
     return true;
   }
 
-  GoogleSignInAccount? googleAccount() {
-    final GoogleSignInAccount? googleUser = _googleSignIn.currentUser;
+  GoogleSignInAccount? getGoogleAccount() {
+    final googleUser = _googleSignIn.currentUser;
     return googleUser;
   }
 
   @override
   Future<bool> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-
     if (googleUser == null) {
       return false;
     }
@@ -43,7 +42,6 @@ class AuthRepository implements AuthRepositoryImpl {
       idToken: googleAuth.idToken,
     );
     await _firebaseAuth.signInWithCredential(credential);
-
     return true;
   }
 
