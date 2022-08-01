@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/stats_page/bloc/stats_page_bloc.dart';
+import 'package:personal_finance_app/stats_page/widget/pie_chart.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
-import 'package:pie_chart/pie_chart.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
 class StatsPage extends StatelessWidget {
@@ -26,53 +26,95 @@ class StatsPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('stats'),
-      ),
-      body: BlocBuilder<StatsPageBloc, StatsPageState>(
-        builder: (context, state) {
-          final txsList = context.read<StatsPageBloc>().state.txs;
-          final dataMap = <String, double>{};
-          var totalValue = 0.0;
-          for (final tx in txsList) {
-            if (dataMap[tx.mainType] == null) {
-              dataMap[tx.mainType] = 0;
-            }
-            dataMap[tx.mainType] = dataMap[tx.mainType]! + tx.amount;
-            totalValue += tx.amount;
-          }
-
-          final colorList = <Color>[
-            Colors.greenAccent,
-            Colors.blue,
-            Colors.red,
-            Colors.yellow,
-            Colors.purple,
-          ];
-          if (totalValue == 0) {
-            return const Center(
-              child: Text('No Stats QQ'),
-            );
-          }
-          return Center(
-            child: Container(
-              margin: const EdgeInsets.all(30),
-              child: PieChart(
-                centerText: '123',
-                dataMap: dataMap,
-                chartType: ChartType.ring,
-                ringStrokeWidth: 40,
-                baseChartColor: Colors.grey[50]!.withOpacity(0.15),
-                colorList: colorList,
-                chartValuesOptions: const ChartValuesOptions(
-                  showChartValuesInPercentage: true,
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          leading: Icon(Icons.person_outline),
+          title: Text(
+            'Stats',
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(100),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.arrow_left_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      '123',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.arrow_right_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-                totalValue: totalValue,
+                TabBar(
+                  isScrollable: true,
+                  unselectedLabelColor: Colors.white.withOpacity(0.3),
+                  indicatorColor: Colors.white,
+                  tabs: [
+                    Tab(
+                      child: Text('Overview'),
+                    ),
+                    Tab(
+                      child: Text('Detail'),
+                    ),
+                    Tab(
+                      child: Text('Pie chart'),
+                    ),
+                    Tab(
+                      child: Text('Ranking'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Icon(Icons.add_alert),
+            ),
+          ],
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            Container(
+              child: Center(
+                child: Text('Tab 1'),
               ),
             ),
-          );
-        },
+            Container(
+              child: Center(
+                child: Text('Tab 2'),
+              ),
+            ),
+            Container(
+              child: Center(
+                child: const TransactionPieChart(),
+              ),
+            ),
+            Container(
+              child: Center(
+                child: Text('Tab 4'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

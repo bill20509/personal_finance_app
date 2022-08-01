@@ -9,3 +9,7 @@ abstract class StatsPageEvent extends Equatable {
 class StatsPageSubscriptionRequested extends StatsPageEvent {
   const StatsPageSubscriptionRequested();
 }
+
+class StatsPageFilterTransaction extends StatsPageEvent {
+  const StatsPageFilterTransaction();
+}
