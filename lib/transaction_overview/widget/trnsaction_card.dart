@@ -6,9 +6,9 @@ import './transaction_detail_page.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({
-    Key? key,
+    super.key,
     required this.tx,
-  }) : super(key: key);
+  });
   final Transaction tx;
   @override
   Widget build(BuildContext context) {

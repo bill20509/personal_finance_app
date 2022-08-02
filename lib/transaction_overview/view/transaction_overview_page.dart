@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_finance_app/add_transaction/view/add_transaction_page.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/widget/drawer.dart';
 import 'package:personal_finance_app/transaction_overview/widget/trnsaction_card.dart';
@@ -31,6 +32,11 @@ class TransactionOverviewView extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Overview'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        key: const Key('homeView_addTodo_floatingActionButton'),
+        child: const Icon(Icons.add),
+        onPressed: () => Navigator.of(context).push(AddTransactionPage.route()),
       ),
       drawer: const UserDrawer(),
       body: MultiBlocListener(

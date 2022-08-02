@@ -10,6 +10,10 @@ class StatsPageSubscriptionRequested extends StatsPageEvent {
   const StatsPageSubscriptionRequested();
 }
 
-class StatsPageFilterTransaction extends StatsPageEvent {
-  const StatsPageFilterTransaction();
+class StatsPageFilterChanged extends StatsPageEvent {
+  const StatsPageFilterChanged();
+}
+
+class StatsPageDateUpdated extends StatsPageEvent {
+  const StatsPageDateUpdated();
 }
