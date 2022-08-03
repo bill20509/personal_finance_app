@@ -77,17 +77,20 @@ class StatsPageBloc extends Bloc<StatsPageEvent, StatsPageState> {
     Emitter<StatsPageState> emit,
   ) async {
     emit(state.copyWith(status: StatsPageStatus.loading));
-    final now = DateTime.now();
+    final startYear = event.now.year;
+    final startMonth = event.now.month;
+    final startDay = event.now.day;
     switch (state.mode) {
       case StatsPageMode.day:
         // TODO: Handle this case.
         break;
       case StatsPageMode.month:
-        final startDate = DateTime.utc(now.year, now.month, 1);
-
-        final endDate = DateTime.utc(now.year, now.month + 1, 0);
+        final startDate = DateTime.utc(startYear, startMonth + event.offset, 1);
+        final endDate =
+            DateTime.utc(startYear, startMonth + event.offset + 1, 0);
         emit(
           state.copyWith(
+            status: StatsPageStatus.success,
             startDateString: DateFormat('yyyy-MM-dd').format(startDate),
             endDateString: DateFormat('yyyy-MM-dd').format(endDate),
             startDate: startDate,
@@ -100,4 +103,36 @@ class StatsPageBloc extends Bloc<StatsPageEvent, StatsPageState> {
         break;
     }
   }
+
+  // Future<void> _onPrevDate(
+  //   StatsPagePrevDate event,
+  //   Emitter<StatsPageState> emit,
+  // ) async {
+  //   switch (state.mode) {
+  //     case StatsPageMode.day:
+  //       // TODO: Handle this case.
+  //       break;
+  //     case StatsPageMode.month:
+  //       final start = DateTime(
+  //         state.startDate.year,
+  //         state.startDate.month - 1,
+  //         state.startDate.day,
+  //       );
+  //       final end = DateTime(
+  //         state.endDate.year,
+  //         state.endDate.month - 1,
+  //         state.endDate.day,
+  //       );
+  //       emit(
+  //         state.copyWith(
+  //           startDate: start,
+  //           endDate: end,
+  //         ),
+  //       );
+  //       break;
+  //     case StatsPageMode.year:
+  //       // TODO: Handle this case.
+  //       break;
+  //   }
+  // }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_finance_app/stats_page/bloc/stats_page_bloc.dart';
+import 'package:personal_finance_app/stats_page/widget/detail_list.dart';
+import 'package:personal_finance_app/stats_page/widget/overview.dart';
 import 'package:personal_finance_app/stats_page/widget/pie_chart.dart';
 import 'package:personal_finance_app/stats_page/widget/ranking_list.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
@@ -17,7 +19,7 @@ class StatsPage extends StatelessWidget {
         transactionRepository: context.read<TransactionRepository>(),
       )
         ..add(const StatsPageSubscriptionRequested())
-        ..add(const StatsPageDateUpdated())
+        ..add(StatsPageDateUpdated(DateTime.now(), 0))
         ..add(const StatsPageFilterChanged()),
       child: StatsPageView(),
     );
@@ -48,7 +50,11 @@ class StatsPageView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          onPressed: null,
+                          onPressed: () => context.read<StatsPageBloc>()
+                            ..add(StatsPageDateUpdated(state.startDate, -1))
+                            ..add(
+                              const StatsPageFilterChanged(),
+                            ),
                           icon: Icon(
                             Icons.arrow_left_rounded,
                             color: Colors.white,
@@ -61,7 +67,11 @@ ${context.read<StatsPageBloc>().state.startDateString} - ${context.read<StatsPag
                           style: TextStyle(color: Colors.white),
                         ),
                         IconButton(
-                          onPressed: null,
+                          onPressed: () => context.read<StatsPageBloc>()
+                            ..add(StatsPageDateUpdated(state.startDate, 1))
+                            ..add(
+                              const StatsPageFilterChanged(),
+                            ),
                           icon: Icon(
                             Icons.arrow_right_rounded,
                             color: Colors.white,
@@ -73,7 +83,7 @@ ${context.read<StatsPageBloc>().state.startDateString} - ${context.read<StatsPag
                       isScrollable: true,
                       unselectedLabelColor: Colors.white.withOpacity(0.3),
                       indicatorColor: Colors.white,
-                      tabs: [
+                      tabs: const [
                         Tab(
                           child: Text('Overview'),
                         ),
@@ -91,9 +101,9 @@ ${context.read<StatsPageBloc>().state.startDateString} - ${context.read<StatsPag
                   ],
                 ),
               ),
-              actions: <Widget>[
+              actions: const [
                 Padding(
-                  padding: const EdgeInsets.only(right: 16.0),
+                  padding: EdgeInsets.only(right: 16.0),
                   child: Icon(Icons.add_alert),
                 ),
               ],
@@ -102,12 +112,12 @@ ${context.read<StatsPageBloc>().state.startDateString} - ${context.read<StatsPag
               children: <Widget>[
                 Container(
                   child: Center(
-                    child: Text('Tab 1'),
+                    child: OverView(),
                   ),
                 ),
                 Container(
                   child: Center(
-                    child: Text('Tab 2'),
+                    child: DetailList(),
                   ),
                 ),
                 Container(

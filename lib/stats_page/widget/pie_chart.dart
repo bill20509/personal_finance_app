@@ -11,7 +11,13 @@ class TransactionPieChart extends StatelessWidget {
     return Builder(builder: (context) {
       final txsList = context.read<StatsPageBloc>().state.txs;
       final dataMap = <String, double>{};
+      final state = context.read<StatsPageBloc>().state;
       var totalValue = 0.0;
+      final title = state.mode == StatsPageMode.month
+          ? '${state.startDate.year}/${state.startDate.month}'
+          : state.mode == StatsPageMode.year
+              ? '${state.startDate.year}'
+              : '${state.startDate.year}/${state.startDate.month}/${state.startDate.day}';
       for (final tx in txsList) {
         if (dataMap[tx.mainType] == null) {
           dataMap[tx.mainType] = 0;
@@ -27,7 +33,7 @@ class TransactionPieChart extends StatelessWidget {
         Colors.yellow,
         Colors.purple,
       ];
-      if (totalValue == 0) {
+      if (txsList.isEmpty) {
         return const Center(
           child: Text('No Stats QQ'),
         );
@@ -36,7 +42,7 @@ class TransactionPieChart extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(30),
           child: PieChart(
-            centerText: '123',
+            centerText: title,
             dataMap: dataMap,
             chartType: ChartType.ring,
             ringStrokeWidth: 40,

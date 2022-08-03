@@ -15,5 +15,20 @@ class StatsPageFilterChanged extends StatsPageEvent {
 }
 
 class StatsPageDateUpdated extends StatsPageEvent {
-  const StatsPageDateUpdated();
+  const StatsPageDateUpdated(
+    this.now,
+    this.offset,
+  );
+  final DateTime now;
+  final int offset;
+  @override
+  List<Object> get props => [now, offset];
+}
+
+class StatsPagePrevDate extends StatsPageEvent {
+  const StatsPagePrevDate();
+}
+
+class StatsPageNextDate extends StatsPageEvent {
+  const StatsPageNextDate();
 }
