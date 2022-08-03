@@ -4,9 +4,8 @@ import 'package:personal_finance_app/add_transaction/bloc/add_transaction_bloc.d
 import 'package:personal_finance_app/add_transaction/widget/date_select.dart';
 import 'package:personal_finance_app/add_transaction/widget/desc_field.dart';
 import 'package:personal_finance_app/add_transaction/widget/sub_type.dart';
+import 'package:personal_finance_app/add_transaction/widget/widgets.dart';
 import 'package:transaction_repository/transaction_repository.dart';
-
-import '../widget/widgets.dart';
 
 class AddTransactionPage extends StatelessWidget {
   const AddTransactionPage({Key? key}) : super(key: key);

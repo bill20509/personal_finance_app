@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
+import 'package:personal_finance_app/transaction_overview/widget/transaction_detail_page.dart';
 import 'package:transaction_api/transaction_api.dart';
-import './transaction_detail_page.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({
@@ -48,7 +48,14 @@ class TransactionCard extends StatelessWidget {
                     Text(tx.title),
                   ],
                 ),
-                Text('+ ${tx.amount}'),
+                Text(
+                  '${tx.transactionType == TransactionType.outcome ? '-' : '+'} ${tx.amount}',
+                  style: TextStyle(
+                    color: tx.transactionType == TransactionType.outcome
+                        ? Colors.red
+                        : Colors.green,
+                  ),
+                ),
               ],
             ),
           ),

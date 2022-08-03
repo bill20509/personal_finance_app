@@ -1,4 +1,6 @@
 export 'amount_field.dart';
+export 'date_select.dart';
+export 'desc_field.dart';
 export 'main_type.dart';
 export 'photo_field.dart';
 export 'sub_type.dart';
