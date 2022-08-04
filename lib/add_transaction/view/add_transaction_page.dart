@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/add_transaction/bloc/add_transaction_bloc.dart';
-import 'package:personal_finance_app/add_transaction/widget/date_select.dart';
-import 'package:personal_finance_app/add_transaction/widget/desc_field.dart';
-import 'package:personal_finance_app/add_transaction/widget/sub_type.dart';
 import 'package:personal_finance_app/add_transaction/widget/widgets.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
@@ -23,12 +20,14 @@ class AddTransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddTransactionBloc, AddTransactionState>(
+    return BlocConsumer<AddTransactionBloc, AddTransactionState>(
       listenWhen: (previous, current) =>
           previous.status != current.status &&
           current.status == AddTransactionStatus.success,
       listener: (context, state) => Navigator.of(context).pop(),
-      child: AddTransactionView(),
+      builder: (context, state) {
+        return AddTransactionView();
+      },
     );
   }
 }
@@ -41,13 +40,12 @@ class AddTransactionView extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Add tx'),
+          title: const Text('Add tx'),
           actions: [
             IconButton(
-              onPressed: () {
-                context
-                    .read<AddTransactionBloc>()
-                    .add(const AddTransactionSubmitted());
+              onPressed: () => {
+                context.read<AddTransactionBloc>()
+                  ..add(const AddTransactionSubmitted())
               },
               icon: const Icon(Icons.check),
             ),

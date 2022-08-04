@@ -62,3 +62,10 @@ class AddTransactionPhotoChanged extends AddTransactionEvent {
   @override
   List<Object> get props => [selectImagePath];
 }
+
+class AddTransactionTabChanged extends AddTransactionEvent {
+  const AddTransactionTabChanged(this.tab);
+  final TransactionType tab;
+  @override
+  List<Object> get props => [tab];
+}

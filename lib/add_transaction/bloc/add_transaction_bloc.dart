@@ -23,6 +23,7 @@ class AddTransactionBloc
     on<AddTransactionSubTypeChanged>(_onSubTypeChanged);
     on<AddTransactionDateChanged>(_onDateChanged);
     on<AddTransactionPhotoChanged>(_onSelectImageChanged);
+    on<AddTransactionTabChanged>(_onChangeTab);
   }
   final TransactionRepository _transactionRepository;
   Future<void> _onSubmitted(
@@ -48,41 +49,57 @@ class AddTransactionBloc
     }
   }
 
-  void _onTitleChanged(
+  Future<void> _onTitleChanged(
     AddTransactionTitleChanged event,
     Emitter<AddTransactionState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(title: event.title));
   }
 
-  void _onAmountChanged(
+  Future<void> _onAmountChanged(
     AddTransactionAmountChanged event,
     Emitter<AddTransactionState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(amount: event.amount));
   }
 
-  void _onMainTypeChanged(
+  Future<void> _onMainTypeChanged(
     AddTransactionMainTypeChanged event,
     Emitter<AddTransactionState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(mainType: event.mainType));
   }
 
-  void _onSubTypeChanged(
+  Future<void> _onSubTypeChanged(
     AddTransactionSubTypeChanged event,
     Emitter<AddTransactionState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(subType: event.subType));
   }
 
-  void _onDateChanged(
-      AddTransactionDateChanged event, Emitter<AddTransactionState> emit) {
+  Future<void> _onDateChanged(
+    AddTransactionDateChanged event,
+    Emitter<AddTransactionState> emit,
+  ) async {
     emit(state.copyWith(dateTime: event.date));
   }
 
-  void _onSelectImageChanged(
-      AddTransactionPhotoChanged event, Emitter<AddTransactionState> emit) {
+  Future<void> _onSelectImageChanged(
+    AddTransactionPhotoChanged event,
+    Emitter<AddTransactionState> emit,
+  ) async {
     emit(state.copyWith(selectImagePath: event.selectImagePath));
+  }
+
+  Future<void> _onChangeTab(
+    AddTransactionTabChanged event,
+    Emitter<AddTransactionState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        transactionType: event.tab,
+      ),
+    );
+    print(state);
   }
 }
