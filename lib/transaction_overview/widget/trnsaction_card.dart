@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
+import 'package:personal_finance_app/home/bloc/transaction_overview_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/widget/transaction_detail_page.dart';
 import 'package:transaction_api/transaction_api.dart';
 
@@ -14,14 +14,15 @@ class TransactionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        final txBloc = context.read<TransactionBloc>();
         final result = await showDialog<int>(
           context: context,
           builder: (context) => TransactionDetailPage(tx: tx),
         );
         if (result == 1) {
-          context.read<TransactionBloc>().add(
-                TransactionOverviewDeleteRequested(tx),
-              );
+          txBloc.add(
+            TransactionOverviewDeleteRequested(tx),
+          );
         }
       },
       child: Card(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_finance_app/add_transaction/view/add_transaction_page.dart';
-import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
+import 'package:personal_finance_app/home/bloc/transaction_overview_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/widget/drawer.dart';
 import 'package:personal_finance_app/transaction_overview/widget/trnsaction_card.dart';
 import 'package:transaction_repository/transaction_repository.dart';
@@ -82,7 +82,9 @@ class TransactionOverviewView extends StatelessWidget {
                             if (d.day == state.currentDate?.day &&
                                 d.month == state.currentDate?.month &&
                                 d.year == state.currentDate?.year) {
-                              return TransactionCard(tx: state.txs[index]);
+                              return TransactionCard(
+                                tx: state.txs[index],
+                              );
                             }
                             return Container();
                           },

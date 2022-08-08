@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_finance_app/add_transaction/view/add_transaction_page.dart';
+import 'package:personal_finance_app/home/bloc/transaction_overview_bloc.dart';
 import 'package:personal_finance_app/home/cubit/home_cubit.dart';
 import 'package:personal_finance_app/stats_page/stats_page.dart';
-import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
 import 'package:personal_finance_app/transaction_overview/transaction_overview_page.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
@@ -12,21 +11,26 @@ class HomePage extends StatelessWidget {
   static Route<void> route() {
     return MaterialPageRoute(
       fullscreenDialog: true,
-      builder: (context) => BlocProvider(
-        create: (context) => TransactionBloc(
-          transactionRepository: context.read<TransactionRepository>(),
-        )
-          ..add(const TransactionOverviewSubscriptionRequested())
-          ..add(TransactionOverviewChangeDate(DateTime.now())),
-        child: const HomePage(),
-      ),
+      builder: (context) => const HomePage(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HomeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => HomeCubit(),
+        ),
+        BlocProvider(
+          create: (_) => TransactionBloc(
+              transactionRepository: context.read<TransactionRepository>())
+            ..add(const TransactionOverviewSubscriptionRequested())
+            ..add(
+              TransactionOverviewChangeDate(DateTime.now()),
+            ),
+        ),
+      ],
       child: const HomeView(),
     );
   }

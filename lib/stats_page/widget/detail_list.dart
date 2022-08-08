@@ -10,13 +10,13 @@ class DetailList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var itemList = <Column>[];
+    final itemList = <Column>[];
     final txs = context.read<StatsPageBloc>().state.txs
       ..sort(
         (a, b) => a.date.compareTo(b.date),
       );
     for (var i = 0; i < txs.length; i++) {
-      var txList = <TransactionCard>[TransactionCard(tx: txs[i])];
+      final txList = <TransactionCard>[TransactionCard(tx: txs[i])];
       while (i < txs.length - 1 &&
           txs[i].date.month == txs[i + 1].date.month &&
           txs[i].date.day == txs[i + 1].date.day) {

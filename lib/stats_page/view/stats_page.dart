@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:personal_finance_app/stats_page/bloc/stats_page_bloc.dart';
 import 'package:personal_finance_app/stats_page/widget/detail_list.dart';
 import 'package:personal_finance_app/stats_page/widget/overview.dart';
 import 'package:personal_finance_app/stats_page/widget/pie_chart.dart';
 import 'package:personal_finance_app/stats_page/widget/ranking_list.dart';
-import 'package:personal_finance_app/transaction_overview/bloc/transaction_overview_bloc.dart';
 import 'package:transaction_repository/transaction_repository.dart';
 
 class StatsPage extends StatelessWidget {
@@ -38,7 +36,6 @@ class StatsPageView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              leading: Icon(Icons.person_outline),
               title: Text(
                 'Stats',
               ),
@@ -101,12 +98,7 @@ ${context.read<StatsPageBloc>().state.startDateString} - ${context.read<StatsPag
                   ],
                 ),
               ),
-              actions: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 16.0),
-                  child: Icon(Icons.add_alert),
-                ),
-              ],
+              actions: const [],
             ),
             body: TabBarView(
               children: <Widget>[
